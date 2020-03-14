@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"regexp"
-	"strconv"
 
 	"github.com/rjNemo/go-wiki/model"
 )
@@ -23,8 +22,9 @@ func RegisteredRoutes() {
 	log.Fatal(server(Port))
 }
 
-func server(p int) error {
-	port := ":" + strconv.Itoa(p)
+func server(p string) error {
+	port := ":" + p
+	// strconv.Itoa(p)
 	return http.ListenAndServe(port, nil)
 }
 
