@@ -1,13 +1,13 @@
-package models
+package model
 
-import "io/ioutil"
+import (
+	"io/ioutil"
+)
 
 type Page struct {
 	Title string
 	Body  []byte
 }
-
-// write constructor blank page
 
 func BlankPage() *Page {
 	return &Page{Title: "Empty page", Body: []byte("Write some content")}
