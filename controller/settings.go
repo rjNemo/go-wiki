@@ -15,5 +15,9 @@ func readEnv(f string) string {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-	return os.Getenv("PORT")
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("PORT must be set")
+	}
+	return port
 }

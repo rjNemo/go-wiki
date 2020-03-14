@@ -24,7 +24,6 @@ func RegisteredRoutes() {
 
 func server(p string) error {
 	port := ":" + p
-	// strconv.Itoa(p)
 	return http.ListenAndServe(port, nil)
 }
 
