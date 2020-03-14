@@ -1,5 +1,7 @@
+{{define "title"}} {{.Title}} | Go-Wiki {{end}} {{define "content"}}
 <h1>{{.Title}}</h1>
 
 <p>[<a href="/edit/{{.Title}}">edit</a>]</p>
 
 <div>{{printf "%s" .Body}}</div>
+{{end}}

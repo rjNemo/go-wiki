@@ -69,12 +69,15 @@ func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 
 func renderTemplate(w http.ResponseWriter, tmpl string, p *model.Page) {
 	// err := templates.ExecuteTemplate(w, "templates/"+tmpl+".html", p)
-	t, err := template.ParseFiles("templates/" + tmpl + ".html")
+	t, err := template.ParseFiles(getTmplName("base"), getTmplName(tmpl))
 	checkError(err, w)
 	err = t.Execute(w, p)
 	checkError(err, w)
 }
 
+func getTmplName(tmpl string) string {
+	return tmplDir + tmpl + ".html"
+}
 func checkError(err error, w http.ResponseWriter) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
