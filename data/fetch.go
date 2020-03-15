@@ -12,7 +12,7 @@ import (
 var exJson string = "https://jsonplaceholder.typicode.com/todos/1"
 
 func Main() {
-	b := fetchApi(exJson)
+	b := FetchApi(exJson)
 	fmt.Println(b)
 }
 

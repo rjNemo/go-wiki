@@ -1,12 +1,13 @@
 package controller
 
 import (
+	"fmt"
 	"html/template"
-	"log"
 	"net/http"
 	"regexp"
 
 	"github.com/rjNemo/go-wiki/model"
+	"github.com/rjNemo/go-wiki/service"
 )
 
 // func ParseTemplates() *template.Template {
@@ -18,13 +19,9 @@ func RegisteredRoutes() {
 	http.HandleFunc("/view/", makeHandler(viewHandler))
 	http.HandleFunc("/edit/", makeHandler(editHandler))
 	http.HandleFunc("/save/", makeHandler(saveHandler))
+	http.HandleFunc("/contact/", contactHandler)
+	http.HandleFunc("/contact/post", postContactHandler)
 	http.HandleFunc("/", homeHandler)
-	log.Fatal(server(Port))
-}
-
-func server(p string) error {
-	port := ":" + p
-	return http.ListenAndServe(port, nil)
 }
 
 // func loveHandler(w http.ResponseWriter, r *http.Request) {
@@ -34,9 +31,7 @@ func server(p string) error {
 // }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	// viewHandler(w, r, "FrontPage")
-	p := model.BlankPage()
-	renderTemplate(w, "home", p)
+	renderTemplate(w, "home", nil)
 }
 
 func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
@@ -64,6 +59,23 @@ func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 	http.Redirect(w, r, "/view/"+title, http.StatusFound)
 }
 
+func contactHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "contact", nil)
+}
+
+func postContactHandler(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	checkError(err, w) // bad error handling
+	mail := parseContactForm(r)
+	service.MailClient(mail)
+	fmt.Println(mail)
+	renderTemplate(w, "contact_sent", nil)
+}
+
+func parseContactForm(r *http.Request) service.Mail {
+	return service.NewMail(r.PostFormValue("email"), r.PostFormValue("message"))
+}
+
 // var templates = template.Must(template.ParseFiles("templates/edit.html", "templates/view.html")) // add slice of fileNAmes
 
 func renderTemplate(w http.ResponseWriter, tmpl string, p *model.Page) {
@@ -77,6 +89,7 @@ func renderTemplate(w http.ResponseWriter, tmpl string, p *model.Page) {
 func getTmplName(tmpl string) string {
 	return tmplDir + tmpl + ".html"
 }
+
 func checkError(err error, w http.ResponseWriter) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
