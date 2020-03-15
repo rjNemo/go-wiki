@@ -4,17 +4,25 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
 
 	"github.com/rjNemo/go-wiki/controller"
 )
 
 func main() {
-	fmt.Printf("Start Go-wiki server on http://localhost:%s at %s\n", controller.Port, time.Now())
-	startServer(controller.Port)
+	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	for i, n := range numbers {
+		fmt.Println("Slice item", i, "is", n)
+	}
+
+	countryCapitalMap := map[string]string{"France": "Paris", "Italy": "Rome", "Japan": "Tokyo"}
+	for k, val := range countryCapitalMap {
+		fmt.Println("Capital of", k, "is", val)
+	}
+	// startServer(controller.Port)
 }
 
 func startServer(p string) {
+	log.Printf("Start Go-wiki server on http://localhost:%s\n", controller.Port)
 	port := ":" + p
 	controller.RegisteredRoutes()
 	log.Fatal(http.ListenAndServe(port, nil))
