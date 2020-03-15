@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -9,16 +8,7 @@ import (
 )
 
 func main() {
-	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8}
-	for i, n := range numbers {
-		fmt.Println("Slice item", i, "is", n)
-	}
-
-	countryCapitalMap := map[string]string{"France": "Paris", "Italy": "Rome", "Japan": "Tokyo"}
-	for k, val := range countryCapitalMap {
-		fmt.Println("Capital of", k, "is", val)
-	}
-	// startServer(controller.Port)
+	startServer(controller.Port)
 }
 
 func startServer(p string) {
