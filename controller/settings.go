@@ -7,6 +7,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// Port value
 var Port string = readEnv(".env")
 var tmplDir string = "templates/"
 

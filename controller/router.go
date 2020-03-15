@@ -14,7 +14,8 @@ import (
 // 	return template.Must(template.ParseFiles("templates/edit.html", "templates/view.html")) // add slice of fileNAmes
 // }
 
-func RegisteredRoutes() {
+// Router dispatch the request to the corresponding route handlers.
+func Router() {
 	// http.HandleFunc("/", loveHandler)
 	http.HandleFunc("/view/", makeHandler(viewHandler))
 	http.HandleFunc("/edit/", makeHandler(editHandler))

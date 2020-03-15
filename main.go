@@ -8,12 +8,12 @@ import (
 )
 
 func main() {
-	startServer(controller.Port)
+	startServer(controller.Port, controller.Router)
 }
 
-func startServer(p string) {
+func startServer(p string, r func()) {
 	log.Printf("Start Go-wiki server on http://localhost:%s\n", controller.Port)
 	port := ":" + p
-	controller.RegisteredRoutes()
+	r()
 	log.Fatal(http.ListenAndServe(port, nil))
 }

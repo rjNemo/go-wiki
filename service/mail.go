@@ -6,6 +6,7 @@ import (
 	"net/smtp"
 )
 
+// Mail holds contact form information
 type Mail struct {
 	// Contact mail address
 	from string
@@ -16,10 +17,12 @@ type Mail struct {
 var hostMail string = "ruidy.nemausat@gmail.com"
 var smtpServer string = "smtp.gmail.com:587"
 
+// NewMail creates a Mail with from and body fields
 func NewMail(from, body string) Mail {
 	return Mail{from, body}
 }
 
+// MailClient runs a mail client and send mail
 func MailClient(m Mail) {
 	c, err := smtp.Dial(smtpServer)
 	if err != nil {
