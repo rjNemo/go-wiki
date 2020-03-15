@@ -5,9 +5,11 @@ import (
 	"net/http"
 
 	"github.com/rjNemo/go-wiki/controller"
+	"github.com/rjNemo/go-wiki/service"
 )
 
 func main() {
+	service.PaymentIntent(1000, "ruidy.nemausat@gmail.com")
 	startServer(controller.Port, controller.Router)
 }
 
