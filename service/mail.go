@@ -14,6 +14,13 @@ type Mail struct {
 	message string
 }
 
+// Sender objects implements Send() method
+type Sender interface {
+	Send()
+}
+
+var _ Sender = &Mail{} // verifies if Mail implements Sender
+
 var hostMail string = "ruidy.nemausat@gmail.com"
 var smtpServer string = "smtp.gmail.com:587"
 
@@ -22,8 +29,8 @@ func NewMail(from, body string) Mail {
 	return Mail{from, body}
 }
 
-// MailClient runs a mail client and send mail
-func MailClient(m Mail) {
+// Send runs a mail client and send mail
+func (m *Mail) Send() {
 	c, err := smtp.Dial(smtpServer)
 	if err != nil {
 		log.Fatal(err)

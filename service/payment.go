@@ -8,6 +8,8 @@ import (
 // secret API key
 var secretKey string = "sk_test_dyp7eLEq2KnxpWE0qIMihTYZ"
 
+// service.PaymentIntent(1000, "ruidy.nemausat@gmail.com")
+
 // PaymentIntent creates a	payment intent
 func PaymentIntent(a int64, m string) (*stripe.PaymentIntent, error) {
 	stripe.Key = secretKey

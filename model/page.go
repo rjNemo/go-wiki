@@ -10,6 +10,26 @@ type Page struct {
 	body  []byte
 }
 
+// Title exposes Page's title field
+func (p Page) Title() string {
+	return p.title
+}
+
+// SetTitle edits Page's title field
+func (p *Page) SetTitle(s string) {
+	p.title = s
+}
+
+// Body exposes Page's body field
+func (p Page) Body() []byte {
+	return p.body
+}
+
+// SetBody edits Page's body field
+func (p *Page) SetBody(b []byte) {
+	p.body = b
+}
+
 // BlankPage constructor returns a pointer to a blank Page.
 func BlankPage() *Page {
 	return &Page{title: "Empty page", body: []byte("Write some content")}

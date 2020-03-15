@@ -8,6 +8,7 @@ import (
 
 	"github.com/rjNemo/go-wiki/model"
 	"github.com/rjNemo/go-wiki/service"
+	"github.com/rjNemo/go-wiki/settings"
 )
 
 // func ParseTemplates() *template.Template {
@@ -21,7 +22,7 @@ func Router() {
 	http.HandleFunc("/edit/", makeHandler(editHandler))
 	http.HandleFunc("/save/", makeHandler(saveHandler))
 	http.HandleFunc("/contact/", contactHandler)
-	http.HandleFunc("/contact/post", postContactHandler)
+	http.HandleFunc("/contact/post/", postContactHandler)
 	http.HandleFunc("/", homeHandler)
 }
 
@@ -68,7 +69,7 @@ func postContactHandler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	checkError(err, w) // bad error handling
 	mail := parseContactForm(r)
-	service.MailClient(mail)
+	mail.Send()
 	fmt.Println(mail)
 	renderTemplate(w, "contact_sent", nil)
 }
@@ -88,7 +89,7 @@ func renderTemplate(w http.ResponseWriter, tmpl string, p *model.Page) {
 }
 
 func getTmplName(tmpl string) string {
-	return tmplDir + tmpl + ".html"
+	return settings.TmplDir + tmpl + ".html"
 }
 
 func checkError(err error, w http.ResponseWriter) {
