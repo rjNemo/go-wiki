@@ -11,6 +11,12 @@ const (
 	last_name TEXT,
 	email TEXT UNIQUE NOT NULL)
 	`
+
+	// QueryGet is the SQL command used to retrieve a user from the table
+	QueryGet = `
+	SELECT * id FROM users WHERE id=$1;
+	`
+
 	// QueryInsert is the SQL command used to insert a user in the table.
 	// Returning the new ID.
 	QueryInsert = `

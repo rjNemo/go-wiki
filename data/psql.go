@@ -33,6 +33,7 @@ func UsePSQL() {
 	// log.Print(u)
 	u1 := model.NewUser(3, 19, "paul", "newman", "PdsN@FDKML.COM")
 	store.Update(16, u1)
+	log.Print(store.Get(1))
 }
 
 func sqlExec(db *sql.DB, s string) {
@@ -52,7 +53,7 @@ func createUserTable(db *sql.DB) {
 type Store interface {
 	CreateTable()
 	Add(i interface{})
-	Get()
+	Get(id int) model.User
 	Find(id int)
 	Update(id int, i interface{})
 	Delete(id int)

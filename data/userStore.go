@@ -17,6 +17,21 @@ func NewUserStore(db *sql.DB) UserStore {
 	return UserStore{db: db}
 }
 
+// Get retrieves the user identified by 'id' from database
+func (us UserStore) Get(uid int) model.User {
+	var id, age int
+	var firstName,lastName,email string
+	row := us.db.QueryRow(QueryGet, uid)
+	switch err:=row.Scan(&id,&age,&firstName,&lastName,&email); err {
+	case sql.ErrNoRows:
+		log.Println("No entry returned")	
+	case nil:
+		return model.NewUser(id, age,firstName,lastName,email)
+	default:
+		log.Fatal(err)
+	}
+}
+
 // Add inserts a user in the database.
 func (us UserStore) Add(u model.User) {
 	id := 0
