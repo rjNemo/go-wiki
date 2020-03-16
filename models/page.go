@@ -1,4 +1,4 @@
-package model
+package models
 
 import (
 	"io/ioutil"
@@ -42,13 +42,13 @@ func NewPage(title string, body []byte) *Page {
 
 // Save a page to the 'data/' folder in txt format.
 func (p *Page) Save() error {
-	fileName := "data/" + p.title + ".txt"
+	fileName := "data/files/" + p.title + ".txt"
 	return ioutil.WriteFile(fileName, p.body, 0600)
 }
 
 // LoadPage reads a saved page data and returns a pointer to the Page.
 func LoadPage(title string) (*Page, error) {
-	fileName := "data/" + title + ".txt"
+	fileName := "data/files/" + title + ".txt"
 	body, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		return nil, err

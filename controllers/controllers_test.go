@@ -1,11 +1,11 @@
-package controller
+package controllers
 
 import (
 	"io"
 	"net/http"
 	"testing"
 
-	"github.com/rjNemo/go-wiki/service"
+	"github.com/rjNemo/go-wiki/services"
 )
 
 func TestParseContactForm(t *testing.T) {
@@ -15,7 +15,7 @@ func TestParseContactForm(t *testing.T) {
 		t.Errorf("%s", err)
 	}
 	ans := parseContactForm(r)
-	if ans != service.NewMail("", "") {
+	if ans != services.NewMail("", "") {
 		t.Errorf("parseContactForm(r) = %v", ans)
 	}
 }

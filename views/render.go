@@ -1,19 +1,28 @@
 package views
 
 import (
+	"log"
 	"net/http"
 	"text/template"
 
-	"github.com/rjNemo/go-wiki/model"
+	"github.com/rjNemo/go-wiki/models"
 	"github.com/rjNemo/go-wiki/settings"
 )
 
-func Template(w http.ResponseWriter, tmpl string, p *model.Page) {
+func Template(w http.ResponseWriter, tmpl string, p *models.Page) {
 	// err := templates.ExecuteTemplate(w, "templates/"+tmpl+".html", p)
 	t, err := template.ParseFiles(getTmplName("base"), getTmplName(tmpl))
-	checkError(err, w)
+
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+
 	err = t.Execute(w, p)
-	checkError(err, w)
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
 }
 
 func getTmplName(tmpl string) string {

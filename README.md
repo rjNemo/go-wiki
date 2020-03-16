@@ -1,6 +1,6 @@
 # Go-Wiki
 
-Wiki web application model built using `Go`
+Wiki web application models built using `Go`
 
 <!-- img.shields.io -->
 

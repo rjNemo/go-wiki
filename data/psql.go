@@ -5,7 +5,7 @@ import (
 	"log"
 
 	_ "github.com/lib/pq" // postgresql database package
-	"github.com/rjNemo/go-wiki/model"
+	"github.com/rjNemo/go-wiki/models"
 	"github.com/rjNemo/go-wiki/settings"
 )
 
@@ -24,41 +24,28 @@ func UsePSQL() {
 		log.Fatal(err)
 	}
 
-	log.Println("Database successfully connected!")
+	log.Println("Connection to database successfully established!")
 
-	createUserTable(db)
 	store := NewUserStore(db)
-	// u := model.TestUser()
+	store.CreateTable()
+	// u := models.TestUser()
 	// store.Add(u)
 	// log.Print(u)
-	u1 := model.NewUser(3, 20, "paul", "newman", "PdsNz@FDKML.COM")
-	store.Update(16, u1)
-	log.Println(store.Get(1))
+	// u1 := models.NewUser(3, 20, "paul", "newman", "PdsNz@FDKML.COM")
+	// store.Update(16, u1)
+	// log.Println(store.Get(1))
 	// store.Delete(8)
-	log.Println(store.GetAll())
-	log.Println(store.Find("first_name", "John"))
-}
-
-func sqlExec(db *sql.DB, s string) {
-	if _, err := db.Exec(s); err != nil {
-		log.Fatal(err)
-		return
-	}
-	log.Printf("Command successfully executed!: %s", s)
-}
-
-func createUserTable(db *sql.DB) {
-	sqlExec(db, QueryCreateTable)
-	log.Print("Table successfully created!")
+	// log.Println(store.GetAll())
+	// log.Println(store.Find("first_name", "John"))
 }
 
 // Store interface defines the methods any store must satisfy
 type Store interface {
-	// CreateTable()
+	CreateTable()
 	Add(i interface{})
-	Get(id int) (model.User, error)
-	GetAll(id int) ([]model.User, error)
+	Get(id int) (models.User, error)
+	GetAll(id int) ([]models.User, error)
 	Delete(id int)
-	Find(ex string)
+	// Find(ex string)
 	Update(id int, i interface{})
 }
