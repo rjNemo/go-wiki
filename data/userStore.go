@@ -39,6 +39,28 @@ func (us UserStore) GetAll() ([]model.User, error) {
 	return users, nil
 }
 
+// Find retrieves a user from the database using an expression
+func (us UserStore) Find(k interface{}, v interface{}) ([]model.User, error) {
+	var id, age int
+	var firstName, lastName, email string
+
+	rows, err := us.db.Query(QueryFind, k, v)
+	if err != nil {
+		return nil, err
+	}
+
+	var users []model.User
+	for rows.Next() {
+		err := rows.Scan(&id, &age, &firstName, &lastName, &email)
+		if err != nil {
+			log.Fatal(err) // too severe
+		}
+		u := model.NewUser(id, age, firstName, lastName, email)
+		users = append(users, u)
+	}
+	return users, nil
+}
+
 // Get retrieves the user identified by 'id' from database
 func (us UserStore) Get(uid int) (model.User, error) {
 	var id, age int

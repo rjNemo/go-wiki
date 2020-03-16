@@ -18,7 +18,7 @@ func TestUser() User {
 		id:        42,
 		firstName: "John",
 		lastName:  "Doe",
-		email:     "jddddSZ@mail.com",
+		email:     "jd@mail.com",
 		age:       42,
 	}
 }

@@ -14,12 +14,18 @@ const (
 
 	// QueryGet is the SQL command used to retrieve a user from the table
 	QueryGet = `
-	SELECT * FROM users WHERE id=$1;
+	SELECT * FROM users WHERE id = $1;
 	`
 
 	// QueryGetAll is the SQL command used to retrieve all users from the database.
 	QueryGetAll = `
-	SELECT * FROM users;
+	SELECT * FROM users ORDER BY id;
+	`
+
+	// QueryFind is the SQL command used to retrieve all users from the table
+	// which satisfy the specified condition
+	QueryFind = `
+	SELECT * FROM users WHERE $1 = $2;
 	`
 
 	// QueryInsert is the SQL command used to insert a user in the table.
