@@ -9,14 +9,14 @@ import (
 	"time"
 )
 
-var exJson string = "https://jsonplaceholder.typicode.com/todos/1"
+var exJSON string = "https://jsonplaceholder.typicode.com/todos/1"
 
 func FetchMain() {
-	b := FetchApi(exJson)
+	b := FetchAPI(exJSON)
 	fmt.Println(b)
 }
 
-func FetchApi(s string) Data {
+func FetchAPI(s string) Data {
 	r, err := http.NewRequest(http.MethodGet, s, nil)
 	if err != nil {
 		log.Fatal(err)
@@ -35,8 +35,8 @@ func FetchApi(s string) Data {
 }
 
 type Data struct {
-	UserId    int
-	Id        int
+	UserID    int
+	ID        int
 	Title     string
 	Completed bool
 }

@@ -4,19 +4,19 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/rjNemo/go-wiki/controller"
 	"github.com/rjNemo/go-wiki/data"
-	"github.com/rjNemo/go-wiki/settings"
 )
 
 func main() {
-	startServer(settings.Port, controller.Router)
+	data.Connect()
+	// startServer(settings.Port, controller.Router)
 }
 
 func startServer(p string, r func()) {
 	log.Printf("Start Go-wiki server on http://localhost:%s", p)
-	data.Connect()
 	port := ":" + p
 	r()
 	log.Fatal(http.ListenAndServe(port, nil))
 }
+
+// appBuilder
