@@ -18,7 +18,26 @@ func NewUserStore(db *sql.DB) UserStore {
 }
 
 // GetAll retrieves all the users from the database.
-func (us UserStore) GetAll() ([]model.User, error) {}
+func (us UserStore) GetAll() ([]model.User, error) {
+	var id, age int
+	var firstName, lastName, email string
+
+	rows, err := us.db.Query(QueryGetAll)
+	if err != nil {
+		return nil, err
+	}
+
+	var users []model.User
+	for rows.Next() {
+		err := rows.Scan(&id, &age, &firstName, &lastName, &email)
+		if err != nil {
+			log.Fatal(err) // too severe
+		}
+		u := model.NewUser(id, age, firstName, lastName, email)
+		users = append(users, u)
+	}
+	return users, nil
+}
 
 // Get retrieves the user identified by 'id' from database
 func (us UserStore) Get(uid int) (model.User, error) {
@@ -74,6 +93,6 @@ func (us UserStore) Delete(id int) {
 		log.Fatal(err) // too severe
 	}
 	if count == 0 {
-		log.Fatal("Update failed") // too severe
+		log.Fatal("Delete failed") // too severe
 	}
 }

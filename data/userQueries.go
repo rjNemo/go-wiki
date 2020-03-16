@@ -40,6 +40,7 @@ const (
 	// QueryDelete is the SQL command used to delete a user from the database.
 	QueryDelete = `
 	DELETE FROM users
-	WHERE id = $1;
+	WHERE id = $1
+	RETURNING *;
 	`
 )

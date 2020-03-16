@@ -31,10 +31,11 @@ func UsePSQL() {
 	// u := model.TestUser()
 	// store.Add(u)
 	// log.Print(u)
-	u1 := model.NewUser(3, 19, "paul", "newman", "PdsN@FDKML.COM")
+	u1 := model.NewUser(3, 20, "paul", "newman", "PdsNz@FDKML.COM")
 	store.Update(16, u1)
 	log.Print(store.Get(1))
-	store.Delete(8)
+	// store.Delete(8)
+	log.Print(store.GetAll())
 }
 
 func sqlExec(db *sql.DB, s string) {
