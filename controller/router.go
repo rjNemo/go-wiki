@@ -26,12 +26,6 @@ func Router() {
 	http.HandleFunc("/", homeHandler)
 }
 
-// func loveHandler(w http.ResponseWriter, r *http.Request) {
-// 	title := r.URL.Path[1:]
-// 	p := model.NewPage(title, nil) // already a pointer
-// 	renderTemplate(w, "love", p)
-// }
-
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "home", nil)
 }

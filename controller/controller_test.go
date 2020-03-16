@@ -18,5 +18,4 @@ func TestParseContactForm(t *testing.T) {
 	if ans != service.NewMail("", "") {
 		t.Errorf("parseContactForm(r) = %v", ans)
 	}
-
 }
