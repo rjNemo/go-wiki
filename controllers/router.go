@@ -12,7 +12,6 @@ func Router() {
 	http.HandleFunc("/edit/", makeHandler(editHandler))
 	http.HandleFunc("/save/", makeHandler(saveHandler))
 	http.HandleFunc("/contact/", contactHandler)
-	http.HandleFunc("/contact/post/", postContactHandler)
 	http.HandleFunc("/", homeHandler)
 }
 

@@ -16,21 +16,13 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
-	views.Template(w, "contact", nil)
-}
-
-func postContactHandler(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
-	checkError(err, w) // bad error handling
-	mail := parseContactForm(r)
-	// mail.Send()
+	if r.Method != http.MethodPost {
+		views.Template(w, "contact", nil)
+		return
+	}
+	mail := services.NewMail(r.PostFormValue("email"), r.PostFormValue("message"))
 	log.Println(mail)
-	views.Template(w, "contact_sent", nil)
-}
-
-func parseContactForm(r *http.Request) services.Mail {
-	log.Println(r.PostForm)
-	return services.NewMail(r.PostFormValue("email"), r.PostFormValue("message"))
+	views.Template(w, "contact", struct{ Success bool }{true})
 }
 
 func checkError(err error, w http.ResponseWriter) {

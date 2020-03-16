@@ -5,11 +5,10 @@ import (
 	"net/http"
 	"text/template"
 
-	"github.com/rjNemo/go-wiki/models"
 	"github.com/rjNemo/go-wiki/settings"
 )
 
-func Template(w http.ResponseWriter, tmpl string, p *models.Page) {
+func Template(w http.ResponseWriter, tmpl string, p interface{}) {
 	// err := templates.ExecuteTemplate(w, "templates/"+tmpl+".html", p)
 	t, err := template.ParseFiles(getTmplName("base"), getTmplName(tmpl))
 
