@@ -1,6 +1,6 @@
 # Go-Wiki
 
-Wiki web application model built using `go`
+Wiki web application model built using `Go`
 
 ## Getting Started
 
@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-You need Go v1.14+ to install `Go-Wiki`. [Get official installation](https://golang.org/doc/install)
+You need `Go v1.14+` to install `Go-Wiki`. [Get official installation](https://golang.org/doc/install)
 
 ### Installing
 
@@ -35,6 +35,7 @@ Add additional notes about how to deploy this on a live system
 ## Built With
 
 - [Go](https://golang.org/) - Build simple, reliable, and efficient software
+- [Bootstrap](https://getbootstrap.com/) - The most popular HTML, CSS, and JS library in the world
 
 ## Contributing
 
@@ -42,13 +43,13 @@ Please read [CONTRIBUTING.md](contributing.md) for details on our code of conduc
 
 ## Versioning
 
-We use [SemVer](https://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/rjNemo/go-wiki/tags).
+We use [SemVer](https://semver.org/) for versioning. For the versions available, see the [CHANGELOG.md](CHANGELOG.md) and the [tags on this repository](https://github.com/rjNemo/go-wiki/tags).
 
 ## Authors
 
-- **Ruidy Nemausat** - _Initial work_ - [PurpleBooth](https://github.com/rjNemo)
+- **Ruidy Nemausat** - _Initial work_ - [rjNemo](https://github.com/rjNemo)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/rjNemo/go-wiki/contributors) who participated in this project.
 
 ## License
 

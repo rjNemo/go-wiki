@@ -11,7 +11,7 @@ import (
 
 var exJson string = "https://jsonplaceholder.typicode.com/todos/1"
 
-func Main() {
+func FetchMain() {
 	b := FetchApi(exJson)
 	fmt.Println(b)
 }

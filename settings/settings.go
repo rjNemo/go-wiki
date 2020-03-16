@@ -18,12 +18,17 @@ var Port = params.port
 // TmplDir exposes the address of the templates folder.
 var TmplDir string = params.tmplDir
 
+// ConnStr exposes the connection string to the database.
+var ConnStr string = params.connStr
+
 // Params struct holds the application settings parameters
 type Params struct {
 	// port exposes the port where the application is served.
 	port string
 	// tmplDir must be set to the address of the templates folder.
 	tmplDir string
+	// connStr must be set to the connection string to the database.
+	connStr string
 }
 
 // NewParams reads env file then initialize a new Params object
@@ -34,8 +39,9 @@ func NewParams(f string) Params {
 	}
 	port := getEnvParam("PORT")
 	tmplDir := getEnvParam("TMPLDIR")
+	connStr := getEnvParam("ConnectionString")
 
-	return Params{port: port, tmplDir: tmplDir}
+	return Params{port: port, tmplDir: tmplDir, connStr: connStr}
 }
 
 func getEnvParam(s string) string {
