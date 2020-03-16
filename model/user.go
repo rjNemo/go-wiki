@@ -1,5 +1,7 @@
 package model
 
+import "strings"
+
 // User represent a go-wiki user. It encapsulate its unique identifier, first and
 // last names, email and age
 type User struct {
@@ -16,7 +18,7 @@ func TestUser() User {
 		id:        42,
 		firstName: "John",
 		lastName:  "Doe",
-		email:     "jddd@mail.com",
+		email:     "jddddSZ@mail.com",
 		age:       42,
 	}
 }
@@ -25,9 +27,9 @@ func TestUser() User {
 func NewUser(id, age int, first, last, email string) User {
 	return User{
 		id:        id,
-		firstName: first,
-		lastName:  last,
-		email:     email,
+		firstName: strings.Title(first),
+		lastName:  strings.Title(last),
+		email:     strings.ToLower(email),
 		age:       age,
 	}
 }
@@ -36,11 +38,6 @@ func NewUser(id, age int, first, last, email string) User {
 func (u User) ID() int {
 	return u.id
 }
-
-// // SetID is a setter
-// func (u *User) SetID(id int) {
-// 	u.id = id
-// }
 
 // FirstName is a getter
 func (u User) FirstName() string {
@@ -57,7 +54,12 @@ func (u User) Email() string {
 	return u.email
 }
 
-// FirstName is a getter
+// SetEmail is a setter
+func (u *User) SetEmail(email string) {
+	u.email = strings.ToLower(email)
+}
+
+// Age is a getter
 func (u User) Age() int {
 	return u.age
 }

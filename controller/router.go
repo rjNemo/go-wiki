@@ -2,18 +2,15 @@ package controller
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
 	"regexp"
 
 	"github.com/rjNemo/go-wiki/model"
 	"github.com/rjNemo/go-wiki/service"
-	"github.com/rjNemo/go-wiki/settings"
+	"github.com/rjNemo/go-wiki/views"
 )
 
-// func ParseTemplates() *template.Template {
-// 	return template.Must(template.ParseFiles("templates/edit.html", "templates/view.html")) // add slice of fileNAmes
-// }
+var validPath = regexp.MustCompile("^/(edit|save|view)/([a-zA-Z0-9]+)$")
 
 // Router dispatch the request to the corresponding route handlers.
 func Router() {
@@ -27,7 +24,7 @@ func Router() {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "home", nil)
+	views.Template(w, "home", nil)
 }
 
 func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
@@ -36,7 +33,7 @@ func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
 		http.Redirect(w, r, "/edit/"+title, http.StatusFound)
 		return
 	}
-	renderTemplate(w, "view", p)
+	views.Template(w, "view", p)
 }
 
 func editHandler(w http.ResponseWriter, r *http.Request, title string) {
@@ -44,7 +41,7 @@ func editHandler(w http.ResponseWriter, r *http.Request, title string) {
 	if err != nil {
 		p = model.NewPage(title, nil)
 	}
-	renderTemplate(w, "edit", p)
+	views.Template(w, "edit", p)
 }
 
 func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
@@ -56,7 +53,7 @@ func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "contact", nil)
+	views.Template(w, "contact", nil)
 }
 
 func postContactHandler(w http.ResponseWriter, r *http.Request) {
@@ -65,25 +62,11 @@ func postContactHandler(w http.ResponseWriter, r *http.Request) {
 	mail := parseContactForm(r)
 	mail.Send()
 	fmt.Println(mail)
-	renderTemplate(w, "contact_sent", nil)
+	views.Template(w, "contact_sent", nil)
 }
 
 func parseContactForm(r *http.Request) service.Mail {
 	return service.NewMail(r.PostFormValue("email"), r.PostFormValue("message"))
-}
-
-// var templates = template.Must(template.ParseFiles("templates/edit.html", "templates/view.html")) // add slice of fileNAmes
-
-func renderTemplate(w http.ResponseWriter, tmpl string, p *model.Page) {
-	// err := templates.ExecuteTemplate(w, "templates/"+tmpl+".html", p)
-	t, err := template.ParseFiles(getTmplName("base"), getTmplName(tmpl))
-	checkError(err, w)
-	err = t.Execute(w, p)
-	checkError(err, w)
-}
-
-func getTmplName(tmpl string) string {
-	return settings.TmplDir + tmpl + ".html"
 }
 
 func checkError(err error, w http.ResponseWriter) {
@@ -92,8 +75,6 @@ func checkError(err error, w http.ResponseWriter) {
 		return
 	}
 }
-
-var validPath = regexp.MustCompile("^/(edit|save|view)/([a-zA-Z0-9]+)$")
 
 func makeHandler(fn func(http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {

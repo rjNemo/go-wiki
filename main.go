@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	data.Connect()
+	data.UsePSQL()
 	// startServer(settings.Port, controller.Router)
 }
 
