@@ -17,18 +17,24 @@ func NewUserStore(db *sql.DB) UserStore {
 	return UserStore{db: db}
 }
 
+// GetAll retrieves all the users from the database.
+func (us UserStore) GetAll() ([]model.User, error) {}
+
 // Get retrieves the user identified by 'id' from database
-func (us UserStore) Get(uid int) model.User {
+func (us UserStore) Get(uid int) (model.User, error) {
 	var id, age int
-	var firstName,lastName,email string
+	var firstName, lastName, email string
+
 	row := us.db.QueryRow(QueryGet, uid)
-	switch err:=row.Scan(&id,&age,&firstName,&lastName,&email); err {
+	switch err := row.Scan(&id, &age, &firstName, &lastName, &email); err {
 	case sql.ErrNoRows:
-		log.Println("No entry returned")	
+		log.Println("No entry returned")
+		return model.User{}, err
 	case nil:
-		return model.NewUser(id, age,firstName,lastName,email)
+		return model.NewUser(id, age, firstName, lastName, email), nil
 	default:
 		log.Fatal(err)
+		return model.User{}, err
 	}
 }
 
@@ -57,7 +63,6 @@ func (us UserStore) Update(id int, u model.User) {
 	}
 }
 
-
 // Delete removes user identified by 'id' from the database
 func (us UserStore) Delete(id int) {
 	res, err := us.db.Exec(QueryDelete, id)
@@ -71,3 +76,4 @@ func (us UserStore) Delete(id int) {
 	if count == 0 {
 		log.Fatal("Update failed") // too severe
 	}
+}
