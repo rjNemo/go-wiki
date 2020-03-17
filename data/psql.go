@@ -11,7 +11,7 @@ import (
 
 // UsePSQL read the connection parameters to establish a connection to the
 // database.
-func UsePSQL() {
+func UsePSQL() *sql.DB {
 	connStr := settings.ConnStr
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
@@ -26,8 +26,10 @@ func UsePSQL() {
 
 	log.Println("Connection to database successfully established!")
 
-	store := NewUserStore(db)
-	store.CreateTable()
+	// store := NewUserStore(db)
+	// store.CreateTable()
+
+	return db
 	// u := models.TestUser()
 	// store.Add(u)
 	// log.Print(u)

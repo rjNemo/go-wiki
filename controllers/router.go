@@ -8,6 +8,7 @@ import (
 // Router dispatch the request to the corresponding route handlers.
 func Router() {
 	// http.HandleFunc("/", loveHandler)
+	// http.HandleFunc("/view/", makeHandler(ph.view))
 	http.HandleFunc("/view/", makeHandler(viewHandler))
 	http.HandleFunc("/edit/", makeHandler(editHandler))
 	http.HandleFunc("/save/", makeHandler(saveHandler))

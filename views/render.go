@@ -8,6 +8,7 @@ import (
 	"github.com/rjNemo/go-wiki/settings"
 )
 
+// Template display the named HTML template to the browser
 func Template(w http.ResponseWriter, tmpl string, p interface{}) {
 	// err := templates.ExecuteTemplate(w, "templates/"+tmpl+".html", p)
 	t, err := template.ParseFiles(getTmplName("base"), getTmplName(tmpl))

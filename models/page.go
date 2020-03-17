@@ -6,6 +6,7 @@ import (
 
 // A Page own a wiki page data and has a title and a body.
 type Page struct {
+	id    int
 	title string
 	body  []byte
 }
@@ -36,8 +37,8 @@ func BlankPage() *Page {
 }
 
 // NewPage constructor returns a pointer to a sample Page.
-func NewPage(title string, body []byte) *Page {
-	return &Page{title: title, body: body}
+func NewPage(id int, title string, body []byte) *Page {
+	return &Page{id: id, title: title, body: body}
 }
 
 // Save a page to the 'data/' folder in txt format.
