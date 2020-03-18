@@ -52,3 +52,9 @@ func (ph PageHandler) save(w http.ResponseWriter, r *http.Request, title string)
 	// checkError(err, w)
 	http.Redirect(w, r, "/view/"+title, http.StatusFound)
 }
+
+func (ph PageHandler) new(w http.ResponseWriter, r *http.Request) {
+	title := r.FormValue("newPage")
+	http.Redirect(w, r, "/edit/"+title, http.StatusFound)
+	return
+}

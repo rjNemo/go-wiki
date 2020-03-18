@@ -40,20 +40,22 @@
           </div>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-inline my-2 my-lg-0">
-              <input
-                class="form-control mr-sm-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button
-                class="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-                action="/view/"
-              >
-                Search
-              </button>
+            <form class="form-inline my-2 my-lg-0" action="/new">
+              <div class="form-group">
+                <input
+                  class="form-control mr-sm-2"
+                  type="text"
+                  name="newPage"
+                  placeholder="New Wiki Entry"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="submit"
+                  value="New"
+                  class="btn btn-outline-primary my-2 my-sm-0"
+                />
+              </div>
             </form>
           </div>
         </div>

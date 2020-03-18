@@ -11,7 +11,8 @@ func Router(ph PageHandler, hh HomeHandler) {
 	http.HandleFunc("/view/", makeHandler(ph.view))
 	http.HandleFunc("/edit/", makeHandler(ph.edit))
 	http.HandleFunc("/save/", makeHandler(ph.save))
-	http.HandleFunc("/contact/", contactHandler)
+	http.HandleFunc("/new/", ph.new)
+	http.HandleFunc("/contact/", hh.contact)
 	http.HandleFunc("/", hh.home)
 }
 

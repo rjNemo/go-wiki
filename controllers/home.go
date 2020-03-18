@@ -20,11 +20,10 @@ func (hh HomeHandler) home(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	views.Template(w, "home", struct{ Wikis []models.Page }{index})
 }
 
-func contactHandler(w http.ResponseWriter, r *http.Request) {
+func (hh HomeHandler) contact(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		views.Template(w, "contact", nil)
 		return

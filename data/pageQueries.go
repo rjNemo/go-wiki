@@ -17,7 +17,7 @@ const (
 
 	// GetAllPages is the SQL command used to retrieve all pages from the database.
 	GetAllPages = `
-	SELECT * FROM pages ORDER BY id;
+	SELECT * FROM pages ORDER BY title;
 	`
 
 	// FindPages is the SQL command used to retrieve all pages from the table
