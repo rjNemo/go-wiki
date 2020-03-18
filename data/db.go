@@ -5,8 +5,6 @@ import (
 	"log"
 
 	_ "github.com/lib/pq" // postgresql database package
-
-	"github.com/rjNemo/go-wiki/models"
 )
 
 // NewDB read the connection parameters to establish a connection to the
@@ -43,8 +41,8 @@ func NewContext(db *sql.DB) Context {
 type Store interface {
 	CreateTable()
 	Add(i interface{})
-	Get(id int) (models.User, error)
-	GetAll(id int) ([]models.User, error)
+	Get(i interface{}) (interface{}, error)
+	GetAll() (interface{}, error)
 	Delete(id int)
 	// Find(ex string)
 	Update(id int, i interface{})
