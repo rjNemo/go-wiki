@@ -2,7 +2,7 @@
 
 Wiki web application models built using `Go`
 
-<!-- img.shields.io -->
+![Go](https://img.shields.io/github/go-mod/go-version/rjNemo/go-wiki) [![License](https://img.shields.io/github/license/rjNemo/go-wiki)](LICENSE.md) ![Release](https://img.shields.io/github/v/release/rjNemo/go-wiki) ![Tag](https://img.shields.io/github/v/tag/rjNemo/go-wiki)
 
 ## Getting Started
 
@@ -38,6 +38,7 @@ Add additional notes about how to deploy this on a live system
 
 - [Go](https://golang.org/) - Build simple, reliable, and efficient software
 - [Bootstrap](https://getbootstrap.com/) - The most popular HTML, CSS, and JS library in the world
+- [Quilljs](https://quilljs.com/) - Your powerful rich text editor
 
 ## Contributing
 

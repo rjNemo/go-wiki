@@ -16,6 +16,7 @@ func Router(ctx data.Context) {
 	http.HandleFunc("/index/", ph.index)
 	http.HandleFunc("/view/", makeHandler(ph.view))
 	http.HandleFunc("/edit/", makeHandler(ph.edit))
+	http.HandleFunc("/editor/", makeHandler(ph.editor))
 	http.HandleFunc("/save/", makeHandler(ph.save))
 	http.HandleFunc("/new/", ph.new)
 	http.HandleFunc("/contact/", hh.contact)

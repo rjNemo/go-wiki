@@ -41,6 +41,10 @@ func (ph PageHandler) edit(w http.ResponseWriter, r *http.Request, title string)
 	views.Template(w, "edit", p)
 }
 
+func (ph PageHandler) editor(w http.ResponseWriter, r *http.Request, title string) {
+	log.Println(r.Body)
+}
+
 func (ph PageHandler) save(w http.ResponseWriter, r *http.Request, title string) {
 	body := r.FormValue("body")
 
