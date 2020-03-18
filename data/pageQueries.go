@@ -6,13 +6,13 @@ const (
 	CreateTablePages = `
 	CREATE TABLE IF NOT EXISTS pages (
 	id SERIAL PRIMARY KEY,
-	title TEXT UNIQUE NOT NULL
+	title TEXT UNIQUE NOT NULL,
 	body TEXT)
 	`
 
 	// GetPage is the SQL command used to retrieve a user from the table
 	GetPage = `
-	SELECT * FROM pages WHERE id = $1;
+	SELECT * FROM pages WHERE title = $1;
 	`
 
 	// GetAllPages is the SQL command used to retrieve all pages from the database.
@@ -46,5 +46,10 @@ const (
 	DELETE FROM pages
 	WHERE id = $1
 	RETURNING *;
+	`
+
+	// ExistsPage is the SQL command used to check whether a page from the database.
+	ExistsPage = `
+	SELECT EXISTS(SELECT * FROM pages WHERE title = $1)
 	`
 )

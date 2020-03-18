@@ -6,12 +6,11 @@ import (
 )
 
 // Router dispatch the request to the corresponding route handlers.
-func Router() {
+func Router(ph PageHandler) {
 	// http.HandleFunc("/", loveHandler)
-	// http.HandleFunc("/view/", makeHandler(ph.view))
-	http.HandleFunc("/view/", makeHandler(viewHandler))
-	http.HandleFunc("/edit/", makeHandler(editHandler))
-	http.HandleFunc("/save/", makeHandler(saveHandler))
+	http.HandleFunc("/view/", makeHandler(ph.view))
+	http.HandleFunc("/edit/", makeHandler(ph.edit))
+	http.HandleFunc("/save/", makeHandler(ph.save))
 	http.HandleFunc("/contact/", contactHandler)
 	http.HandleFunc("/", homeHandler)
 }

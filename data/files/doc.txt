@@ -1,4 +1,4 @@
-                  Type a term in the search bar. 
+                        Type a term in the search bar. 
 
 If it already exist you will reach this page. 
 
@@ -10,4 +10,5 @@ Have fun
 ❤️
 ❤️
 ❤️    
+    
     

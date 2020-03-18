@@ -10,15 +10,28 @@ import (
 )
 
 func main() {
-	data.UsePSQL()
-	startServer(settings.Port, controllers.Router)
-}
+	// connect to db
+	db, err := data.NewDB(settings.ConnStr)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-func startServer(p string, r func()) {
-	log.Printf("Start Go-wiki server on http://localhost:%s", p)
-	port := ":" + p
-	r()
+	// register store and inject them in handlers
+	ctx := data.NewContext(db)
+	ctx.Pages.CreateTable()
+	// ctx.Users.CreateTable()
+
+	ph := controllers.PageHandler{Ctx: ctx}
+	// uh := controllers.UserHandler{Users: UserStore}
+
+	// startServer(, controllers.Router)
+	log.Printf("Start Go-wiki server on http://localhost:%s", settings.Port)
+	port := ":" + settings.Port
+	controllers.Router(ph)
 	log.Fatal(http.ListenAndServe(port, nil))
 }
 
-// appBuilder
+// func startServer(p string, r func()) {
+// }
+
+// // appBuilder

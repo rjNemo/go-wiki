@@ -11,6 +11,11 @@ type Page struct {
 	body  []byte
 }
 
+// ID exposes Page's title field
+func (p Page) ID() int {
+	return p.id
+}
+
 // Title exposes Page's title field
 func (p Page) Title() string {
 	return p.title
