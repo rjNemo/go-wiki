@@ -22,16 +22,14 @@ func main() {
 
 	// Migrate db …
 	ctx.Pages.CreateTable()
-	// ctx.Users.CreateTable()
+	ctx.Users.CreateTable()
 
-	// create handlers around context
-	hh := controllers.HomeHandler{Ctx: ctx}
-	ph := controllers.PageHandler{Ctx: ctx}
-	// uh := controllers.UserHandler{Users: UserStore}
-
-	// startServer
 	log.Printf("Start Go-wiki server on http://localhost:%s", settings.Port)
 	port := ":" + settings.Port
-	controllers.Router(ph, hh)
+
+	// create handlers around context
+	controllers.Router(ctx)
+
+	// startServer
 	log.Fatal(http.ListenAndServe(port, nil))
 }

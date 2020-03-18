@@ -3,11 +3,16 @@ package controllers
 import (
 	"net/http"
 	"regexp"
+
+	"github.com/rjNemo/go-wiki/data"
 )
 
 // Router dispatch the request to the corresponding route handlers.
-func Router(ph PageHandler, hh HomeHandler) {
-	// http.HandleFunc("/", loveHandler)
+func Router(ctx data.Context) {
+	hh := HomeHandler{Ctx: ctx}
+	ph := PageHandler{Ctx: ctx}
+	// uh := UserHandler{Users: UserStore}
+
 	http.HandleFunc("/view/", makeHandler(ph.view))
 	http.HandleFunc("/edit/", makeHandler(ph.edit))
 	http.HandleFunc("/save/", makeHandler(ph.save))
