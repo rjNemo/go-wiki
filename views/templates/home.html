@@ -8,37 +8,13 @@
     </p>
     <hr class="my-4" />
     <p>
-      Look at our documentation to discover how to contribute !
+      Start contributing now or take a look at our documentation to discover how
+      to!
     </p>
-    <a class="btn btn-primary btn-lg" href="/view/Doc" role="button"
+    <a class="btn btn-primary btn-lg" href="/index" role="button">Start</a>
+    <a class="btn btn-outline-primary btn-lg" href="/view/Doc" role="button"
       >Documentation</a
     >
-  </div>
-
-  <div>
-    <h2>Go-Wiki Index</h2>
-    <p>Some description</p>
-
-    <table class="table table-hover">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Title</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {{ range $index, $entry := .Wikis }}
-        <tr>
-          <td><a href="/view/{{ $entry.Title }}">{{ $entry.Title }}</a></td>
-          <th scope="row">
-            <a class="badge-pill badge-primary" href="/edit/{{ $entry.Title }}"
-              >Edit</a
-            >
-          </th>
-        </tr>
-        {{ end }}
-      </tbody>
-    </table>
   </div>
 </div>
 {{end}}

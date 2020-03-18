@@ -17,7 +17,7 @@
     <nav>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-          <a class="navbar-brand" href="/">🐹 Go-Wiki</a>
+          <a class="navbar-brand" href="/index">🐹 Go-Wiki</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -53,7 +53,7 @@
                 <input
                   type="submit"
                   value="New"
-                  class="btn btn-outline-primary my-2 my-sm-0"
+                  class="btn btn-primary my-2 my-sm-0"
                 />
               </div>
             </form>
@@ -65,10 +65,11 @@
     <title>{{template "title" .}}</title>
   </head>
   <body>
-    <div class="container">
-      {{template "content" .}}
+    <div class="section">
+      <div class="container">
+        {{template "content" .}}
+      </div>
     </div>
-
     <footer class="footer bg-light">
       <div class="container ">
         <span

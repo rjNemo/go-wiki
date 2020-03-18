@@ -14,7 +14,14 @@ type PageHandler struct {
 	Ctx data.Context
 }
 
-// func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
+func (ph PageHandler) index(w http.ResponseWriter, r *http.Request) {
+	index, err := ph.Ctx.Pages.GetAll()
+	if err != nil {
+		log.Fatal(err)
+	}
+	views.Template(w, "index", struct{ Wikis []models.Page }{index})
+}
+
 func (ph PageHandler) view(w http.ResponseWriter, r *http.Request, title string) {
 	// p, err := models.LoadPage(title)
 	p, err := ph.Ctx.Pages.Get(title)

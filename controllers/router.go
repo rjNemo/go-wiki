@@ -13,6 +13,7 @@ func Router(ctx data.Context) {
 	ph := PageHandler{Ctx: ctx}
 	// uh := UserHandler{Users: UserStore}
 
+	http.HandleFunc("/index/", ph.index)
 	http.HandleFunc("/view/", makeHandler(ph.view))
 	http.HandleFunc("/edit/", makeHandler(ph.edit))
 	http.HandleFunc("/save/", makeHandler(ph.save))
