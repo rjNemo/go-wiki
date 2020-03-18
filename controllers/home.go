@@ -4,15 +4,24 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/rjNemo/go-wiki/data"
+	"github.com/rjNemo/go-wiki/models"
 	"github.com/rjNemo/go-wiki/services"
 	"github.com/rjNemo/go-wiki/views"
 )
 
-// type HomeHandler struct {
-// }
+// HomeHandler responds to requests using Handlers
+type HomeHandler struct {
+	Ctx data.Context
+}
 
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	views.Template(w, "home", nil)
+func (hh HomeHandler) home(w http.ResponseWriter, r *http.Request) {
+	index, err := hh.Ctx.Pages.GetAll()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	views.Template(w, "home", struct{ Wikis []models.Page }{index})
 }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {

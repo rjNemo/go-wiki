@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/rjNemo/go-wiki/data"
@@ -11,7 +12,7 @@ import (
 // PageHandler will respond to requests using Handlers
 type PageHandler struct {
 	Ctx data.Context
-} //and add each actual handler as a method
+}
 
 // func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
 func (ph PageHandler) view(w http.ResponseWriter, r *http.Request, title string) {
@@ -35,13 +36,17 @@ func (ph PageHandler) edit(w http.ResponseWriter, r *http.Request, title string)
 
 func (ph PageHandler) save(w http.ResponseWriter, r *http.Request, title string) {
 	body := r.FormValue("body")
-	p := models.NewPage(0, title, []byte(body))
-	// err := p.Save()
 
 	if !ph.Ctx.Pages.Exists(title) {
+		p := models.NewPage(0, title, []byte(body))
 		ph.Ctx.Pages.Add(*p)
 	} else {
-		ph.Ctx.Pages.Update(p.ID(), *p)
+		p, err := ph.Ctx.Pages.Get(title)
+		if err != nil {
+			log.Fatal(err)
+		}
+		p.SetBody([]byte(body))
+		ph.Ctx.Pages.Update(p.ID(), p)
 	}
 
 	// checkError(err, w)

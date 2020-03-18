@@ -3,6 +3,7 @@ package data
 import (
 	"database/sql"
 	"log"
+	"strings"
 
 	"github.com/rjNemo/go-wiki/models"
 )
@@ -18,20 +19,20 @@ func NewPageStore(db *sql.DB) PageStore {
 }
 
 // CreateTable creates the page table in the database if it exits not yet.
-func (us PageStore) CreateTable() {
-	if _, err := us.db.Exec(CreateTablePages); err != nil {
+func (ps PageStore) CreateTable() {
+	if _, err := ps.db.Exec(CreateTablePages); err != nil {
 		log.Fatal(err)
 	}
 	// log.Print("Table successfully created!")
 }
 
 // GetAll retrieves all the pages from the database.
-func (us PageStore) GetAll() ([]models.Page, error) {
+func (ps PageStore) GetAll() ([]models.Page, error) {
 	var id int
 	var title string
 	var body []byte
 
-	rows, err := us.db.Query(GetAllPages)
+	rows, err := ps.db.Query(GetAllPages)
 	if err != nil {
 		return nil, err
 	}
@@ -49,12 +50,12 @@ func (us PageStore) GetAll() ([]models.Page, error) {
 }
 
 // Get retrieves the page identified by 'id' from database
-func (us PageStore) Get(t string) (models.Page, error) {
+func (ps PageStore) Get(t string) (models.Page, error) {
 	var id int
 	var title string
 	var body []byte
-
-	row := us.db.QueryRow(GetPage, t)
+	t = strings.Title(t)
+	row := ps.db.QueryRow(GetPage, t)
 	switch err := row.Scan(&id, &title, &body); err {
 	case sql.ErrNoRows:
 		log.Println("No entry returned")
@@ -68,9 +69,9 @@ func (us PageStore) Get(t string) (models.Page, error) {
 }
 
 // Add inserts a page in the database.
-func (us PageStore) Add(u models.Page) {
+func (ps PageStore) Add(u models.Page) {
 	id := 0
-	err := us.db.QueryRow(InsertPage, u.Title(), u.Body()).Scan(&id)
+	err := ps.db.QueryRow(InsertPage, u.Title(), u.Body()).Scan(&id)
 	if err != nil {
 		log.Fatal(err) // too severe
 	}
@@ -78,8 +79,8 @@ func (us PageStore) Add(u models.Page) {
 }
 
 // Update edits page identified by 'id' in the database
-func (us PageStore) Update(id int, u models.Page) {
-	res, err := us.db.Exec(UpdatePage, id, u.Title(), u.Body())
+func (ps PageStore) Update(id int, u models.Page) {
+	res, err := ps.db.Exec(UpdatePage, id, u.Title(), string(u.Body()))
 	if err != nil {
 		log.Fatal(err) // too severe
 	}
@@ -93,8 +94,8 @@ func (us PageStore) Update(id int, u models.Page) {
 }
 
 // Delete removes page identified by 'id' from the database
-func (us PageStore) Delete(id int) {
-	res, err := us.db.Exec(QueryDelete, id)
+func (ps PageStore) Delete(id int) {
+	res, err := ps.db.Exec(QueryDelete, id)
 	if err != nil {
 		log.Fatal(err) // too severe
 	}
@@ -107,22 +108,21 @@ func (us PageStore) Delete(id int) {
 	}
 }
 
-func (ps PageStore) Exists(title string) bool {
-	var e bool
-	err := ps.db.QueryRow(ExistsPage, title).Scan(&e)
-	log.Println("e:", e)
+// Exists returns true if the page named title exists, false otherwise
+func (ps PageStore) Exists(title string) (e bool) {
+	err := ps.db.QueryRow(ExistsPage, strings.Title(title)).Scan(&e)
 	if err != nil {
 		log.Fatal(err) // too severe
 	}
-	return e //== title
+	return e
 }
 
 // Find retrieves a page from the database using an expression
-// func (us PageStore) Find(k interface{}, v interface{}) ([]models.Page, error) {
+// func (ps PageStore) Find(k interface{}, v interface{}) ([]models.Page, error) {
 // 	var id, title int
 // 	var body, lastName, email string
 
-// 	rows, err := us.db.Query(QueryFind, k, v)
+// 	rows, err := ps.db.Query(QueryFind, k, v)
 // 	if err != nil {
 // 		return nil, err
 // 	}

@@ -2,6 +2,7 @@ package models
 
 import (
 	"io/ioutil"
+	"strings"
 )
 
 // A Page own a wiki page data and has a title and a body.
@@ -43,14 +44,17 @@ func BlankPage() *Page {
 
 // NewPage constructor returns a pointer to a sample Page.
 func NewPage(id int, title string, body []byte) *Page {
-	return &Page{id: id, title: title, body: body}
+	return &Page{
+		id:    id,
+		title: strings.Title(title),
+		body:  body}
 }
 
 // Save a page to the 'data/' folder in txt format.
-func (p *Page) Save() error {
-	fileName := "data/files/" + p.title + ".txt"
-	return ioutil.WriteFile(fileName, p.body, 0600)
-}
+// func (p *Page) Save() error {
+// 	fileName := "data/files/" + p.title + ".txt"
+// 	return ioutil.WriteFile(fileName, p.body, 0600)
+// }
 
 // LoadPage reads a saved page data and returns a pointer to the Page.
 func LoadPage(title string) (*Page, error) {

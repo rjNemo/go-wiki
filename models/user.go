@@ -30,8 +30,7 @@ func NewUser(id, age int, first, last, email string) User {
 		firstName: strings.Title(first),
 		lastName:  strings.Title(last),
 		email:     strings.ToLower(email),
-		age:       age,
-	}
+		age:       age}
 }
 
 // ID is a getter

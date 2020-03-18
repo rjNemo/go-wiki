@@ -14,5 +14,16 @@
       >Documentation</a
     >
   </div>
+  <div>
+    <h2>Index</h2>
+    <p>Some description</p>
+    <ul>
+      {{ range $index, $entry := .Wikis }}
+      <li>
+        {{ $index }}: <a href="/view/{{ $entry.Title }}">{{ $entry.Title }}</a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
 </div>
 {{end}}

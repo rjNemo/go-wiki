@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+	log.Println("*** Go-wiki v0.1 ©2020 ***")
 	// connect to db
 	db, err := data.NewDB(settings.ConnStr)
 	if err != nil {
@@ -18,20 +19,19 @@ func main() {
 
 	// register store and inject them in handlers
 	ctx := data.NewContext(db)
+
+	// Migrate db …
 	ctx.Pages.CreateTable()
 	// ctx.Users.CreateTable()
 
+	// create handlers around context
+	hh := controllers.HomeHandler{Ctx: ctx}
 	ph := controllers.PageHandler{Ctx: ctx}
 	// uh := controllers.UserHandler{Users: UserStore}
 
-	// startServer(, controllers.Router)
+	// startServer
 	log.Printf("Start Go-wiki server on http://localhost:%s", settings.Port)
 	port := ":" + settings.Port
-	controllers.Router(ph)
+	controllers.Router(ph, hh)
 	log.Fatal(http.ListenAndServe(port, nil))
 }
-
-// func startServer(p string, r func()) {
-// }
-
-// // appBuilder

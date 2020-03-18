@@ -6,13 +6,13 @@ import (
 )
 
 // Router dispatch the request to the corresponding route handlers.
-func Router(ph PageHandler) {
+func Router(ph PageHandler, hh HomeHandler) {
 	// http.HandleFunc("/", loveHandler)
 	http.HandleFunc("/view/", makeHandler(ph.view))
 	http.HandleFunc("/edit/", makeHandler(ph.edit))
 	http.HandleFunc("/save/", makeHandler(ph.save))
 	http.HandleFunc("/contact/", contactHandler)
-	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/", hh.home)
 }
 
 func makeHandler(fn func(http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
