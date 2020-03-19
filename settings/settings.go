@@ -35,7 +35,7 @@ type Params struct {
 func NewParams(f string) Params {
 	err := godotenv.Load(f)
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Println("Error loading .env file")
 	}
 	port := getEnvParam("PORT")
 	tmplDir := getEnvParam("TMPLDIR")
