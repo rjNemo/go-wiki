@@ -32,12 +32,34 @@ go run main.go
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+An example app is deployed on [Heroku](https://www.heroku.com/).
+
+Follow these steps to deploy. Compile the application:
+
+```bash
+go build -o bin/go-wiki
+```
+
+Make sure that any unused modules have been removed from your application and is resistant to erosion:
+
+```bash
+go mod tidy
+go mod vendor
+```
+
+You will need an `.env` file such as:
+
+```env
+PORT=8080
+TMPLDIR=views/templates/
+DATABASE_URL=postgres://oshiervtwfrqrr:f177bc7ff355c142931aeb3f3
+```
 
 ## Built With
 
 - [Go](https://golang.org/) - Build simple, reliable, and efficient software
 - [Bootstrap](https://getbootstrap.com/) - The most popular HTML, CSS, and JS library in the world
+- [PostgreSQL](https://www.postgresql.org/) - The world's most advanced open source database
   <!-- - [Quilljs](https://quilljs.com/) - Your powerful rich text editor -->
 
 ## Contributing
@@ -60,6 +82,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
+For inspiration:
+
+- [Go MVC](https://www.calhoun.io/)
+- [Alex Edwards](https://www.alexedwards.net/blog/organising-database-access)
