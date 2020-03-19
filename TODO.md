@@ -5,3 +5,4 @@
 - [ ] Refactor UserStore code
 - [ ] Request-scoped [context](https://www.alexedwards.net/blog/organising-database-access)
 - [ ] Post quilljs data to backend
+- [ ] Write the tests …
