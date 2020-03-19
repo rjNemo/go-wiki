@@ -11,6 +11,7 @@ import (
 
 func main() {
 	log.Println("*** Go-wiki v0.1 ©2020 ***")
+
 	// connect to db
 	db, err := data.NewDB(settings.ConnStr)
 	if err != nil {
@@ -24,12 +25,11 @@ func main() {
 	ctx.Pages.CreateTable()
 	ctx.Users.CreateTable()
 
-	log.Printf("Start Go-wiki server on http://localhost:%s", settings.Port)
-	port := ":" + settings.Port
-
 	// create handlers around context
 	controllers.Router(ctx)
 
 	// startServer
+	log.Printf("Start Go-wiki server on http://localhost:%s", settings.Port)
+	port := ":" + settings.Port
 	log.Fatal(http.ListenAndServe(port, nil))
 }

@@ -38,7 +38,7 @@ Add additional notes about how to deploy this on a live system
 
 - [Go](https://golang.org/) - Build simple, reliable, and efficient software
 - [Bootstrap](https://getbootstrap.com/) - The most popular HTML, CSS, and JS library in the world
-- [Quilljs](https://quilljs.com/) - Your powerful rich text editor
+  <!-- - [Quilljs](https://quilljs.com/) - Your powerful rich text editor -->
 
 ## Contributing
 

@@ -41,15 +41,20 @@ func (ph PageHandler) edit(w http.ResponseWriter, r *http.Request, title string)
 	views.Template(w, "edit", p)
 }
 
-func (ph PageHandler) editor(w http.ResponseWriter, r *http.Request, title string) {
-	log.Println(r.Body)
-}
+// func (ph PageHandler) editor(w http.ResponseWriter, r *http.Request) {
+// 	log.Println(r.Body)
+// 	views.Template(w, "editor", nil)
+// }
 
 func (ph PageHandler) save(w http.ResponseWriter, r *http.Request, title string) {
 	body := r.FormValue("body")
 
 	if !ph.Ctx.Pages.Exists(title) {
+		// p, err := models.NewPage(0, title, []byte(body))
 		p := models.NewPage(0, title, []byte(body))
+		// if err != nil {
+		// 	log.Fatal(err)
+		// }
 		ph.Ctx.Pages.Add(*p)
 	} else {
 		p, err := ph.Ctx.Pages.Get(title)

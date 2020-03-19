@@ -1,19 +1,19 @@
 package models
 
 import (
-	"io/ioutil"
+	"errors"
 	"strings"
 )
 
 // A Page own a wiki page data and has a title and a body.
 type Page struct {
-	id    int
+	id    uint
 	title string
 	body  []byte
 }
 
 // ID exposes Page's title field
-func (p Page) ID() int {
+func (p Page) ID() uint {
 	return p.id
 }
 
@@ -43,12 +43,23 @@ func BlankPage() *Page {
 }
 
 // NewPage constructor returns a pointer to a sample Page.
-func NewPage(id int, title string, body []byte) *Page {
+// func NewPage(id uint, title string, body []byte) (*Page, error) {
+func NewPage(id uint, title string, body []byte) *Page {
+	// if id < 0 {
+	// 	return nil, errNegID
+	// }
+	// if title == "" {
+	// 	return nil, errBlankTitle
+	// }
 	return &Page{
 		id:    id,
 		title: strings.Title(title),
 		body:  body}
+	// , nil
 }
+
+var errBlankTitle = errors.New("The title must not be blank")
+var errNegID = errors.New("The ID must be unsigned")
 
 // Save a page to the 'data/' folder in txt format.
 // func (p *Page) Save() error {
@@ -57,11 +68,11 @@ func NewPage(id int, title string, body []byte) *Page {
 // }
 
 // LoadPage reads a saved page data and returns a pointer to the Page.
-func LoadPage(title string) (*Page, error) {
-	fileName := "data/files/" + title + ".txt"
-	body, err := ioutil.ReadFile(fileName)
-	if err != nil {
-		return nil, err
-	}
-	return &Page{title: title, body: body}, nil
-}
+// func LoadPage(title string) (*Page, error) {
+// 	fileName := "data/files/" + title + ".txt"
+// 	body, err := ioutil.ReadFile(fileName)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	return &Page{title: title, body: body}, nil
+// }

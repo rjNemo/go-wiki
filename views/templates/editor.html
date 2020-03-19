@@ -12,7 +12,7 @@
 </div>
 
 <div class="form-group">
-  <form onsubmit="save()">
+  <form id="saveForm">
     <input class="btn btn-primary" type="submit" value="Save changes" />
   </form>
 </div>
@@ -26,21 +26,24 @@
     theme: "snow"
   });
 
-  save = async () => {
-    // e.preventDefault();
+  saveForm = document.getElementById("saveForm");
+
+  saveForm.addEventListener("submit", async e => {
+    e.preventDefault();
     console.log("send to backend");
     let text = quill.getContents();
     console.log(text);
 
     response = await fetch("http://localhost:8080/editor", {
-      method: "POST",
+      method: "post",
       body: JSON.stringify(text),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       }
-    }).then(r => console.log(r.json()));
+    }); //.then(r => console.log(r.json()));
+    // .then(r => (r));
     // return await response.json();
-  };
+  });
 </script>
 {{end}}

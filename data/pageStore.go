@@ -28,7 +28,7 @@ func (ps PageStore) CreateTable() {
 
 // GetAll retrieves all the pages from the database.
 func (ps PageStore) GetAll() ([]models.Page, error) {
-	var id int
+	var id uint
 	var title string
 	var body []byte
 
@@ -43,7 +43,11 @@ func (ps PageStore) GetAll() ([]models.Page, error) {
 		if err != nil {
 			log.Fatal(err) // too severe
 		}
+		// p, err := models.NewPage(id, title, body)
 		p := models.NewPage(id, title, body)
+		// if err != nil {
+		// 	log.Printf("Error loading page id=%d: %s", id, err)
+		// }
 		pages = append(pages, *p)
 	}
 	return pages, nil
@@ -51,7 +55,7 @@ func (ps PageStore) GetAll() ([]models.Page, error) {
 
 // Get retrieves the page identified by 'id' from database
 func (ps PageStore) Get(t string) (models.Page, error) {
-	var id int
+	var id uint
 	var title string
 	var body []byte
 	t = strings.Title(t)
@@ -60,11 +64,20 @@ func (ps PageStore) Get(t string) (models.Page, error) {
 	case sql.ErrNoRows:
 		log.Println("No entry returned")
 		return models.Page{}, err
+		// return nil, err
 	case nil:
 		return *models.NewPage(id, title, body), nil
+		// p, err := models.NewPage(id, title, body)
+		// if err != nil {
+		// 	return *p, nil
+		// }
+		// log.Fatal(err)
+		// return models.Page{}, err
+		// return nil, err
 	default:
 		log.Fatal(err)
 		return models.Page{}, err
+		// return nil, err
 	}
 }
 
@@ -79,7 +92,7 @@ func (ps PageStore) Add(u models.Page) {
 }
 
 // Update edits page identified by 'id' in the database
-func (ps PageStore) Update(id int, u models.Page) {
+func (ps PageStore) Update(id uint, u models.Page) {
 	res, err := ps.db.Exec(UpdatePage, id, u.Title(), string(u.Body()))
 	if err != nil {
 		log.Fatal(err) // too severe
@@ -94,7 +107,7 @@ func (ps PageStore) Update(id int, u models.Page) {
 }
 
 // Delete removes page identified by 'id' from the database
-func (ps PageStore) Delete(id int) {
+func (ps PageStore) Delete(id uint) {
 	res, err := ps.db.Exec(QueryDelete, id)
 	if err != nil {
 		log.Fatal(err) // too severe
