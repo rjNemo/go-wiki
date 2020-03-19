@@ -1,0 +1,17 @@
+# github.com/joho/godotenv v1.3.0
+## explicit
+github.com/joho/godotenv
+# github.com/lib/pq v1.3.0
+## explicit
+github.com/lib/pq
+github.com/lib/pq/oid
+github.com/lib/pq/scram
+# github.com/stretchr/testify v1.5.1
+## explicit
+# github.com/stripe/stripe-go v70.5.0+incompatible
+## explicit
+github.com/stripe/stripe-go
+github.com/stripe/stripe-go/form
+github.com/stripe/stripe-go/paymentintent
+# golang.org/x/net v0.0.0-20200301022130-244492dfa37a
+## explicit

@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/rjNemo/go-wiki/controllers"
 	"github.com/rjNemo/go-wiki/data"
@@ -13,7 +14,8 @@ func main() {
 	log.Println("*** Go-wiki v0.1 ©2020 ***")
 
 	// connect to db
-	db, err := data.NewDB(settings.ConnStr)
+	// db, err := data.NewDB(settings.ConnStr)
+	db, err := data.NewDB(os.Getenv("DATABASE_URL"))
 	if err != nil {
 		log.Fatal(err)
 	}
