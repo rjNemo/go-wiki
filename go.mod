@@ -7,5 +7,5 @@ require (
 	github.com/lib/pq v1.3.0
 	github.com/stretchr/testify v1.5.1 // indirect
 	github.com/stripe/stripe-go v70.5.0+incompatible
-	golang.org/x/net v0.7.0 // indirect
+	golang.org/x/net v0.36.0 // indirect
 )
